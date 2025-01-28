@@ -6,8 +6,8 @@ const menu = [
 ];
 
 // Global Variables
-const cashInRegister = 100;
-const nextOrderId = 1;
+let cashInRegister = 100;
+let nextOrderId = 1;
 const orderQueue = [];
 
 function AddNewPizza(pizzaObj) {
@@ -16,6 +16,11 @@ function AddNewPizza(pizzaObj) {
 
 function placeOrder(pizzaName) {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
+
+  if (!selectedPizza) {
+    console.error(`${pizzaName} does not exist in the menu`);
+    return;
+  }
   cashInRegister += selectedPizza.price;
 
   const newOrder = {
@@ -27,7 +32,7 @@ function placeOrder(pizzaName) {
   return newOrder;
 }
 
-function completeOrder(orderId) {
+function completeOrder(orderId: number) {
   const order = orderQueue.find((order) => order.id === orderId);
   order.status = "completed";
   return order;
@@ -38,7 +43,7 @@ AddNewPizza({ name: "BBQ Chicken", cost: 12 });
 AddNewPizza({ name: "Spicy Sausage", cost: 11 });
 
 placeOrder("Chicken Bacon Ranch");
-completeOrder("1");
+completeOrder(1);
 
 console.log("Menu:", menu);
 console.log("Cash in register:", cashInRegister);
