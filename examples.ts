@@ -20,18 +20,13 @@ type Person = {
   name: string;
   age: number;
   isStudent: boolean;
-  address: Address;
+  address?: Address;
 };
 
 let person1: Person = {
   name: "Izzy",
   age: 28,
   isStudent: false,
-  address: {
-    street: "123 Main",
-    city: "Anytown",
-    country: "USA",
-  },
 };
 
 let person2: Person = {
@@ -44,6 +39,12 @@ let person2: Person = {
     country: "USA",
   },
 };
+
+function displayInfo(person) {
+  console.log(`${person.name} lives at ${person.address?.street}`);
+}
+
+displayInfo(person1);
 
 /* NOTES:
 -The "type" keyword creates a new name for a type. This exists only in TS and is great for readability and code reuse. By convention, the name that we give our type starts with a capital letter ex: type Food.
