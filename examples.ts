@@ -48,6 +48,7 @@ function displayInfo(person) {
 displayInfo(person1);
  */
 
+/*
 // TYPING ARRAYS
 let ages: number[] = [100, 101];
 ages.push(true);
@@ -72,20 +73,43 @@ let person2: Person = {
 
 let people: Person[] = [person1, person2];
 // let people: Array<Person> = [person1, person2];
+ */
+
+// LITERAL TYPES & UNION LITERAL TYPES
+
+// Literal Types ex:
+let myName: "Izzy" = "Izzy1"; // Error! Type '"Izzy1"' is not assignable to type '"Izzy"'.
+const myName2: "Izzy" = "Izzy1"; // Error! Type '"Izzy1"' is not assignable to type '"Izzy"'.
+
+// Union Literal Types ex:
+type UserRole = "guest" | "member" | "admin";
+let userRole: UserRole = "member";
+
+// I can also nest the same options in a different "type"
+type User = {
+  username: string;
+  role: "guest" | "member" | "admin";
+};
 
 /* NOTES:
--The "type" keyword creates a new name for a type. This exists only in TS and is great for readability and code reuse. By convention, the name that we give our type starts with a capital letter ex: type Food.
+A: The "type" keyword creates a new name for a type. This exists only in TS and is great for readability and code reuse. By convention, the name that we give our type starts with a capital letter ex: type Food.
 
--For "typing arrays" you can teach TS that a type is an array ex:
+B: For "typing arrays" you can teach TS that a type is an array ex:
 "let ages: number[] = [100, 101]"; but if is a primite data type I can write  
 "let ages = [100, 101]" and TS will understand that this is an array.
 
-1-) 
+B.1: 
 V.1 let people: Person[] = [person1, person2];
 V.2 let people: Array<Person> = [person1, person2];
 
 These two versions do the same its just different syntax.
 
-*/
+C: Literal types allow you to specify the exact value a variable can hold.  Instead of a broad type like "string", you're saying, "This variable must be this specific string".
 
-// NEXT TOPIC
+C.2: Union Literal Types: they act as a form of content control, restricting a variable to a specific set of string (or other primitive) values. Enforcing Specific Values:  Sometimes, you want to restrict a variable to a very specific set of values.  Think of things like:
+
+type Direction = "North" | "East" | "South" | "West";
+let heading: Direction = "North"; // Perfectly fine
+heading = "South"; // Also fine
+heading = "Up"; // Error! "Up" is not a valid Direction
+*/

@@ -21,7 +21,7 @@ const menu = [
 // Global Variables
 let cashInRegister = 100;
 let nextOrderId = 1;
-const orderQueue = [];
+const orderHistory: Order[] = [];
 
 function AddNewPizza(pizzaObj: Pizza) {
   menu.push(pizzaObj);
@@ -41,12 +41,17 @@ function placeOrder(pizzaName: string) {
     pizza: selectedPizza,
     status: "ordered",
   };
-  orderQueue.push(newOrder);
+  orderHistory.push(newOrder);
   return newOrder;
 }
 
 function completeOrder(orderId: number) {
-  const order = orderQueue.find((order) => order.id === orderId);
+  const order = orderHistory.find((order) => order.id === orderId);
+
+  if (!order) {
+    console.error(`${orderId} was not found in the orderQueue`);
+    return;
+  }
   order.status = "completed";
   return order;
 }
@@ -60,4 +65,4 @@ completeOrder(1);
 
 console.log("Menu:", menu);
 console.log("Cash in register:", cashInRegister);
-console.log("Order queue:", orderQueue);
+console.log("Order history:", orderHistory);
