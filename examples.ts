@@ -157,4 +157,10 @@ E: Learned to avoid "any" since it defeats the purpose of TS:
 
 E.1: The "any" type tells TS that a variable can hold a value of any type. 
 E.2: This means: No Type Restrictions & All Operations Allowed.
+
+F: Learned about "void" return type:
+
+F.1 The void return type in TS is used when a function doesn't explicitly return a value.
+F.2 You don't need to use the return keyword in a void function.
+F.3 Often used for functions that perform side effects, such as modifying variables, logging to the console, or making network requests.
 */

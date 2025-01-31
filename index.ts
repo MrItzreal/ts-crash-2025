@@ -24,11 +24,11 @@ let cashInRegister = 100;
 let nextOrderId = 1;
 const orderHistory: Order[] = [];
 
-function AddNewPizza(pizzaObj: Pizza) {
+function AddNewPizza(pizzaObj: Pizza): void {
   menu.push(pizzaObj);
 }
 
-function placeOrder(pizzaName: string) {
+function placeOrder(pizzaName: string): Order | undefined {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
 
   if (!selectedPizza) {
@@ -46,7 +46,7 @@ function placeOrder(pizzaName: string) {
   return newOrder;
 }
 
-function completeOrder(orderId: number) {
+function completeOrder(orderId: number): Order | undefined {
   const order = orderHistory.find((order) => order.id === orderId);
 
   if (!order) {
