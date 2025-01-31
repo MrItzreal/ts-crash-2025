@@ -93,7 +93,8 @@ type User = {
 };
 */
 
-// Function Return Types:
+/* 
+// FUNCTION RETURN TYPES:
 type UserRole = "guest" | "member" | "admin";
 
 type User = {
@@ -115,6 +116,16 @@ function fetchUserDetails(username: string): User {
 
   return user;
 }
+  */
+
+/*
+// TS-SPECIFIC TYPE: "any":
+let value = 1;
+// let value: any = 1;
+value.toUpperCase();
+value = "Hi";
+value.map();
+*/
 
 /* NOTES:
 A: The "type" keyword creates a new name for a type. This exists only in TS and is great for readability and code reuse. By convention, the name that we give our type starts with a capital letter ex: type Food.
@@ -141,4 +152,9 @@ heading = "Up"; // Error! "Up" is not a valid Direction
 D: Type Narrowing: Works very well with union literal types. Inside a "switch" statement or an "if" statement that checks the value of a variable with a union literal type, TypeScript can narrow down the type to a specific literal within that block of code.
 
 D.1: Type narrowing can be used when we write a function or within a scope and don't determine its data type. TypeScript expects us to narrow down the type.
+
+E: Learned to avoid "any" since it defeats the purpose of TS:
+
+E.1: The "any" type tells TS that a variable can hold a value of any type. 
+E.2: This means: No Type Restrictions & All Operations Allowed.
 */
