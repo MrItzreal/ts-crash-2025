@@ -75,6 +75,7 @@ let people: Person[] = [person1, person2];
 // let people: Array<Person> = [person1, person2];
  */
 
+/* 
 // LITERAL TYPES & UNION LITERAL TYPES
 
 // Literal Types ex:
@@ -90,6 +91,30 @@ type User = {
   username: string;
   role: "guest" | "member" | "admin";
 };
+*/
+
+// Function Return Types:
+type UserRole = "guest" | "member" | "admin";
+
+type User = {
+  username: string;
+  role: UserRole;
+};
+
+const users: User[] = [
+  { username: "john_doe", role: "member" },
+  { username: "jane_doe", role: "admin" },
+  { username: "guest_user", role: "guest" },
+];
+
+function fetchUserDetails(username: string): User {
+  const user = users.find((user) => user.username === username);
+  if (!user) {
+    throw new Error(`User with username ${username} not found`);
+  }
+
+  return user;
+}
 
 /* NOTES:
 A: The "type" keyword creates a new name for a type. This exists only in TS and is great for readability and code reuse. By convention, the name that we give our type starts with a capital letter ex: type Food.
