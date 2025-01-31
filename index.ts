@@ -1,5 +1,6 @@
 // Pizza "type":
 type Pizza = {
+  id: number;
   name: string;
   price: number;
 };
@@ -8,14 +9,14 @@ type Pizza = {
 type Order = {
   id: number;
   pizza: Pizza;
-  status: string;
+  status: "ordered" | "completed";
 };
 
-const menu = [
-  { name: "Margherita", price: 8 },
-  { name: "Pepperoni", price: 10 },
-  { name: "Hawaiian", price: 10 },
-  { name: "Veggie", price: 9 },
+const menu: Pizza[] = [
+  { id: 1, name: "Margherita", price: 8 },
+  { id: 2, name: "Pepperoni", price: 10 },
+  { id: 3, name: "Hawaiian", price: 10 },
+  { id: 4, name: "Veggie", price: 9 },
 ];
 
 // Global Variables
@@ -36,7 +37,7 @@ function placeOrder(pizzaName: string) {
   }
   cashInRegister += selectedPizza.price;
 
-  const newOrder = {
+  const newOrder: Order = {
     id: nextOrderId++,
     pizza: selectedPizza,
     status: "ordered",
@@ -56,9 +57,21 @@ function completeOrder(orderId: number) {
   return order;
 }
 
-AddNewPizza({ name: "Chicken Bacon Ranch", price: 12 });
-AddNewPizza({ name: "BBQ Chicken", price: 12 });
-AddNewPizza({ name: "Spicy Sausage", price: 11 });
+function getPizzaDetail(identifier: string | number) {
+  if (typeof identifier === "string") {
+    return menu.find(
+      (pizza) => pizza.name.toLowerCase() === identifier.toLowerCase()
+    );
+  } else if (typeof identifier === "number") {
+    return menu.find((pizza) => pizza.id === identifier);
+  } else {
+    throw new TypeError("Parameter `identifier` must be a string or a number");
+  }
+}
+
+AddNewPizza({ id: 5, name: "Chicken Bacon Ranch", price: 12 });
+AddNewPizza({ id: 6, name: "BBQ Chicken", price: 12 });
+AddNewPizza({ id: 7, name: "Spicy Sausage", price: 11 });
 
 placeOrder("Chicken Bacon Ranch");
 completeOrder(1);

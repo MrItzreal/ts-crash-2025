@@ -112,4 +112,8 @@ type Direction = "North" | "East" | "South" | "West";
 let heading: Direction = "North"; // Perfectly fine
 heading = "South"; // Also fine
 heading = "Up"; // Error! "Up" is not a valid Direction
+
+D: Type Narrowing: Works very well with union literal types. Inside a "switch" statement or an "if" statement that checks the value of a variable with a union literal type, TypeScript can narrow down the type to a specific literal within that block of code.
+
+D.1: Type narrowing can be used when we write a function or within a scope and don't determine its data type. TypeScript expects us to narrow down the type.
 */
