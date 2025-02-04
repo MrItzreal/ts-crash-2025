@@ -127,6 +127,48 @@ value = "Hi";
 value.map();
 */
 
+//UTILITY TYPES & PARTIAL TYPES
+type User = {
+  id: number;
+  username: string;
+  role: "member" | "contributor" | "admin";
+};
+
+// This would be a way to partial but is manually typed
+// type UpdatedUser = {
+//   id?: number;
+//   username?: string;
+//   role?: "member" | "contributor" | "admin";
+// };
+
+//This partial approach is the same as above but faster.
+type UpdatedUser = Partial<User>;
+
+const users: User[] = [
+  { id: 1, username: "jane_doe", role: "member" },
+  { id: 2, username: "john_doe", role: "contributor" },
+  { id: 3, username: "guest_user", role: "admin" },
+  { id: 4, username: "user_guest", role: "member" },
+];
+
+function updateUser(id: number, updates: UpdatedUser) {
+  // Find the user in the array by the id
+  const foundUser = users.find((user) => user.id === id);
+  if (!foundUser) {
+    console.log("User not found");
+    return;
+  }
+
+  // Use Object.assign to update the found user in place
+  Object.assign(foundUser, updates);
+}
+
+// Example updates:
+updateUser(1, { username: "new_john_doe" });
+updateUser(4, { role: "contributor" });
+
+console.log(users);
+
 /* NOTES:
 A: The "type" keyword creates a new name for a type. This exists only in TS and is great for readability and code reuse. By convention, the name that we give our type starts with a capital letter ex: type Food.
 
@@ -163,4 +205,22 @@ F: Learned about "void" return type:
 F.1 The void return type in TS is used when a function doesn't explicitly return a value.
 F.2 You don't need to use the return keyword in a void function.
 F.3 Often used for functions that perform side effects, such as modifying variables, logging to the console, or making network requests.
+
+
+G: Utility Types & Partial Types
+
+G.1: Like functions, they take other "types" in as parameters and return new types with some changes. Built-in to TS, perform commonly needed modifications to existing types.
+
+G.2: Use "Generics" syntax using angle brackets (<>) for example: Partial<User>. When using partial, the "p" must be capitalized: "Partial".
+
+G.3 Partial types modifies the type you pass in and turns all properties into optional properties.
+ 
+G.: In JavaScript, Object.assign() is a method used to copy the values of all enumerable own properties from one or more source objects to a target object. It returns the modified target object. 
+
+G.: Object.assign(target, ...sources);
+- target: The object that will receive the copied properties.
+- sources: One or more objects from which to copy the properties.
+
+
+
 */
