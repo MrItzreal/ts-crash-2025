@@ -12,21 +12,28 @@ type Order = {
   status: "ordered" | "completed";
 };
 
-const menu: Pizza[] = [
-  { id: 1, name: "Margherita", price: 8 },
-  { id: 2, name: "Pepperoni", price: 10 },
-  { id: 3, name: "Hawaiian", price: 10 },
-  { id: 4, name: "Veggie", price: 9 },
-];
-
 // Global Variables
 let cashInRegister = 100;
 let nextOrderId = 1;
+let nextPizzaId = 1;
+
+const menu: Pizza[] = [
+  { id: nextPizzaId++, name: "Margherita", price: 8 },
+  { id: nextPizzaId++, name: "Pepperoni", price: 10 },
+  { id: nextPizzaId++, name: "Hawaiian", price: 10 },
+  { id: nextPizzaId++, name: "Veggie", price: 9 },
+];
+
 const orderHistory: Order[] = [];
 
 function AddNewPizza(pizzaObj: Pizza): void {
+  pizzaObj.id = nextPizzaId++;
   menu.push(pizzaObj);
 }
+
+AddNewPizza({ name: "Chicken Bacon Ranch", price: 12 });
+AddNewPizza({ name: "BBQ Chicken", price: 12 });
+AddNewPizza({ name: "Spicy Sausage", price: 11 });
 
 function placeOrder(pizzaName: string): Order | undefined {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
@@ -69,13 +76,9 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
   }
 }
 
-AddNewPizza({ id: 5, name: "Chicken Bacon Ranch", price: 12 });
-AddNewPizza({ id: 6, name: "BBQ Chicken", price: 12 });
-AddNewPizza({ id: 7, name: "Spicy Sausage", price: 11 });
-
 placeOrder("Chicken Bacon Ranch");
 completeOrder(1);
 
 console.log("Menu:", menu);
-console.log("Cash in register:", cashInRegister);
-console.log("Order history:", orderHistory);
+// console.log("Cash in register:", cashInRegister);
+// console.log("Order history:", orderHistory);
