@@ -127,7 +127,7 @@ value = "Hi";
 value.map();
 */
 
-//UTILITY TYPES & PARTIAL TYPES
+//UTILITY TYPE: "PARTIAL".
 type User = {
   id: number;
   username: string;
@@ -207,17 +207,26 @@ F.2 You don't need to use the return keyword in a void function.
 F.3 Often used for functions that perform side effects, such as modifying variables, logging to the console, or making network requests.
 
 
-G: Utility Types & Partial Types
+G: Utility Types
 
 G.1: Like functions, they take other "types" in as parameters and return new types with some changes. Built-in to TS, perform commonly needed modifications to existing types.
 
-G.2: Use "Generics" syntax using angle brackets (<>) for example: Partial<User>. When using partial, the "p" must be capitalized: "Partial".
+G.2: Use "Generics" syntax using angle brackets (<>) for example: Partial<User>. When using utility types, the 1st letter must be capitalized: "Partial".
 
-G.3 Partial types modifies the type you pass in and turns all properties into optional properties.
+G.3: Partial type modifies the type you pass in and turns all properties into optional properties.
+
+G.4: It's important to use Partial carefully, especially when working with large objects. If you make too many properties optional, it can make your code less predictable and potentially lead to errors.
+
+G.5: Other Utility Types:
+
+-Required: Makes all properties of a type required.
+-Readonly: Makes all properties of a type read-only.
+-Pick: Creates a new type with only a subset of properties from an existing type.
+-Exclude: Creates a new type with all properties from an existing type except for a specified subset.
  
-G.: In JavaScript, Object.assign() is a method used to copy the values of all enumerable own properties from one or more source objects to a target object. It returns the modified target object. 
+G.6: In JavaScript, Object.assign() is a method used to copy the values of all enumerable own properties from one or more source objects to a target object. It returns the modified target object. 
 
-G.: Object.assign(target, ...sources);
+G.7: Object.assign(target, ...sources);
 - target: The object that will receive the copied properties.
 - sources: One or more objects from which to copy the properties.
 
