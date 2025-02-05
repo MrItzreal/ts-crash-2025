@@ -26,9 +26,14 @@ const menu: Pizza[] = [
 
 const orderHistory: Order[] = [];
 
-function AddNewPizza(pizzaObj: Pizza): void {
-  pizzaObj.id = nextPizzaId++;
-  menu.push(pizzaObj);
+function AddNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza {
+  const newPizza: Pizza = {
+    id: nextPizzaId++,
+    ...pizzaObj,
+  };
+
+  menu.push(newPizza);
+  return newPizza;
 }
 
 AddNewPizza({ name: "Chicken Bacon Ranch", price: 12 });

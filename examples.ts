@@ -127,6 +127,8 @@ value = "Hi";
 value.map();
 */
 
+/* 
+
 //UTILITY TYPE: "PARTIAL".
 type User = {
   id: number;
@@ -167,6 +169,49 @@ function updateUser(id: number, updates: UpdatedUser) {
 updateUser(1, { username: "new_john_doe" });
 updateUser(4, { role: "contributor" });
 
+console.log(users);
+
+*/
+
+//UTILITY TYPE: "OMIT".
+type User = {
+  id: number;
+  username: string;
+  role: "member" | "contributor" | "admin";
+};
+
+type UpdatedUser = Partial<User>;
+
+let nextUserId = 1;
+
+const users: User[] = [
+  { id: nextUserId++, username: "jane_doe", role: "member" },
+  { id: nextUserId++, username: "john_doe", role: "contributor" },
+];
+
+function updateUser(id: number, updates: UpdatedUser) {
+  const foundUser = users.find((user) => user.id === id);
+  if (!foundUser) {
+    console.log("User not found");
+    return;
+  }
+
+  // Use Object.assign to update the found user in place
+  Object.assign(foundUser, updates);
+}
+
+function addNewUser(newUser: Omit<User, "id" | "user">): User {
+  const user: User = {
+    id: nextUserId++,
+    ...newUser,
+  };
+
+  users.push(user);
+  return user;
+}
+
+//example usage
+addNewUser({ username: "joe_schmoe", role: "member" });
 console.log(users);
 
 /* NOTES:
@@ -219,10 +264,11 @@ G.4: It's important to use Partial carefully, especially when working with large
 
 G.5: Other Utility Types:
 
--Required: Makes all properties of a type required.
--Readonly: Makes all properties of a type read-only.
--Pick: Creates a new type with only a subset of properties from an existing type.
--Exclude: Creates a new type with all properties from an existing type except for a specified subset.
+-`Required`: Makes all properties of a type required.
+-`Readonly`: Makes all properties of a type read-only.
+-`Pick`: Creates a new type with only a subset of properties from an existing type.
+-`Exclude`: Creates a new type with all properties from an existing type except for a specified subset.
+-`Omit`: Takes in a type AND a string (or union of strings) property names, and returns a new type with those properties removed. The opposite of `Pick`. Syntax: Omit<Type, Keys>.
  
 G.6: In JavaScript, Object.assign() is a method used to copy the values of all enumerable own properties from one or more source objects to a target object. It returns the modified target object. 
 
