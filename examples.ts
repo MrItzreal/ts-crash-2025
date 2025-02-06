@@ -173,6 +173,7 @@ console.log(users);
 
 */
 
+/*
 //UTILITY TYPE: "OMIT".
 type User = {
   id: number;
@@ -213,6 +214,38 @@ function addNewUser(newUser: Omit<User, "id" | "user">): User {
 //example usage
 addNewUser({ username: "joe_schmoe", role: "member" });
 console.log(users);
+*/
+
+/* 
+// GENERICS
+const gameScores = [14, 21, 33, 42, 59];
+
+const favoriteThings = [
+  "raindrops on roses",
+  "whiskers on kittens",
+  "bright copper kettles",
+  "warm woolen mittens",
+];
+
+const voters = [
+  { name: "Alice", age: 100 },
+  { name: "Bob", age: 32 },
+];
+
+function getLastItem<Type>(array: Type[]): Type | undefined {
+  return array[array.length - 1];
+}
+
+console.log(getLastItem(gameScores));
+console.log(getLastItem(favoriteThings));
+console.log(getLastItem(voters));
+
+// Another short example of using "Generics"
+function addToArray<T>(array: T[], item: T): T[] {
+  array.push(item);
+  return array;
+}
+*/
 
 /* NOTES:
 A: The "type" keyword creates a new name for a type. This exists only in TS and is great for readability and code reuse. By convention, the name that we give our type starts with a capital letter ex: type Food.
@@ -276,6 +309,12 @@ G.7: Object.assign(target, ...sources);
 - target: The object that will receive the copied properties.
 - sources: One or more objects from which to copy the properties.
 
+H: Generics
 
+H.1: Generics are like templates for functions and types. They allow you to write code that can work with different data types without knowing those types beforehand, making your code more flexible and reusable.
+H.2: Add flexibility to existing functions and types, etc.
+H.3: The angle brackets "<>" introduce type parameters. These act as placeholders for specific types that will be provided when the generic function or type is used.
+H.4: "T" is a naming convention for a single type parameter, but you can use more descriptive names like ItemType or ElementType to improve readability, especially when you have multiple type parameters.
+H.5: Explicit Return Types: You can explicitly specify the return type of a generic function, as we did in the getLastItem example. This helps clarify the function's behavior and ensures type safety.
 
 */
