@@ -240,11 +240,42 @@ console.log(getLastItem(gameScores));
 console.log(getLastItem(favoriteThings));
 console.log(getLastItem(voters));
 
-// Another short example of using "Generics"
+// Another example of using "Generics"
+// Pizza "type":
+type Pizza = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+// Order "type":
+type Order = {
+  id: number;
+  pizza: Pizza;
+  status: "ordered" | "completed";
+};
+
+// Global Variables
+let cashInRegister = 100;
+let nextOrderId = 1;
+let nextPizzaId = 1;
+
+const menu: Pizza[] = [
+  { id: nextPizzaId++, name: "Margherita", price: 8 },
+  { id: nextPizzaId++, name: "Pepperoni", price: 10 },
+  { id: nextPizzaId++, name: "Hawaiian", price: 10 },
+  { id: nextPizzaId++, name: "Veggie", price: 9 },
+];
+
+const orderHistory: Order[] = [];
+
 function addToArray<T>(array: T[], item: T): T[] {
   array.push(item);
   return array;
 }
+
+addToArray<Pizza>(menu, {id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12 })
+addToArray<Order>(orderHistory, {id: nextOrderId++, pizza: menu[2], status:"completed" })
 */
 
 /* NOTES:
@@ -316,5 +347,5 @@ H.2: Add flexibility to existing functions and types, etc.
 H.3: The angle brackets "<>" introduce type parameters. These act as placeholders for specific types that will be provided when the generic function or type is used.
 H.4: "T" is a naming convention for a single type parameter, but you can use more descriptive names like ItemType or ElementType to improve readability, especially when you have multiple type parameters.
 H.5: Explicit Return Types: You can explicitly specify the return type of a generic function, as we did in the getLastItem example. This helps clarify the function's behavior and ensures type safety.
-
+H.6: It's good practice to explicitly type your generic functions.
 */
